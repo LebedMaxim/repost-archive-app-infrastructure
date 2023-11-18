@@ -7,16 +7,6 @@ volumes:
   db_data:
 
 services:
-  repost-archive:
-    build: .
-    ports:
-      - "3002:3002"
-    image: repost-archive
-    container_name: repost-archive
-    volumes:
-      - "/src/app/node_modules"
-      - ".:/src/app"
-
   keycloak:
     image: quay.io/keycloak/keycloak:21.0.1
     container_name: keycloak
@@ -42,7 +32,7 @@ services:
     depends_on:
       - postgres-keycloak
     networks:
-      - postgres-keycloak-network
+      - repost-archive-network
 
   postgres-keycloak:
     image: postgres:latest
@@ -54,8 +44,8 @@ services:
       POSTGRES_USER: keycloak
       POSTGRES_PASSWORD: password
     networks:
-      - postgres-keycloak-network
+      - repost-archive-network
 
 networks:
-  postgres-keycloak-network:
+  repost-archive-network:
     driver: bridge
