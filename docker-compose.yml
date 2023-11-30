@@ -8,7 +8,7 @@ volumes:
 
 services:
   repost-archive-keycloak:
-    image: quay.io/keycloak/keycloak:21.0.1
+    image: quay.io/keycloak/keycloak:latest
     container_name: repost-archive-keycloak
     environment:
       KC_DB: postgres
