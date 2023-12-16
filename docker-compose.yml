@@ -14,9 +14,9 @@ services:
     volumes:
       - db_data:/var/lib/repost-archive-keycloak-postgres/data
     environment:
-      POSTGRES_DB: ${REPOST_ARCHIVE_KC_POSTGRES_DB_NAME}
-      POSTGRES_USER: ${REPOST_ARCHIVE_KC_POSTGRES_USER}
-      POSTGRES_PASSWORD: ${REPOST_ARCHIVE_KC_POSTGRES_PASSWORD}
+      POSTGRES_DB: ${REPOST_ARCHIVE_KEYCLOAK_DB_NAME}
+      POSTGRES_USER: ${REPOST_ARCHIVE_KEYCLOAK_DB_USERNAME}
+      POSTGRES_PASSWORD: ${REPOST_ARCHIVE_KEYCLOAK_DB_PASSWORD}
     networks:
       - repost-archive-network
 
@@ -24,13 +24,13 @@ services:
     image: quay.io/keycloak/keycloak:latest
     container_name: repost-archive-keycloak
     environment:
-      KC_DB: ${REPOST_ARCHIVE_KC_DB}
-      KC_DB_URL: jdbc:postgresql://repost-archive-keycloak-postgres/${REPOST_ARCHIVE_KC_POSTGRES_DB_NAME}
-      KC_DB_USERNAME: ${REPOST_ARCHIVE_KC_POSTGRES_USER}
-      KC_DB_PASSWORD: ${REPOST_ARCHIVE_KC_POSTGRES_PASSWORD}
+      KC_DB: ${REPOST_ARCHIVE_KEYCLOAK_DB}
+      KC_DB_URL: jdbc:postgresql://repost-archive-keycloak-postgres/${REPOST_ARCHIVE_KEYCLOAK_DB_NAME}
+      KC_DB_USERNAME: ${REPOST_ARCHIVE_KEYCLOAK_DB_USERNAME}
+      KC_DB_PASSWORD: ${REPOST_ARCHIVE_KEYCLOAK_DB_PASSWORD}
       KEYCLOAK_ADMIN: ${REPOST_ARCHIVE_KEYCLOAK_ADMIN}
       KEYCLOAK_ADMIN_PASSWORD: ${REPOST_ARCHIVE_KEYCLOAK_ADMIN_PASSWORD}
-      KC_LOG_LEVEL: ${REPOST_ARCHIVE_KC_LOG_LEVEL}
+      KC_LOG_LEVEL: ${REPOST_ARCHIVE_KEYCLOAK_LOG_LEVEL}
     command:
       - start-dev
       - --import-realm
@@ -40,7 +40,7 @@ services:
         target: /opt/keycloak/data/import/realm.json
         read_only: true
     ports:
-      - "30000:8080"
+      - "${REPOST_ARCHIVE_KEYCLOAK_DB_PORT}:8080"
     depends_on:
       - repost-archive-keycloak-postgres
     networks:
