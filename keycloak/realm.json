@@ -400,7 +400,7 @@
           "attributes": {}
         }
       ],
-      "repost-archive-client": []
+      "repost-archive-ui-client": []
     }
   },
   "groups": [],
@@ -648,7 +648,7 @@
     },
     {
       "id": "9248f41a-e708-4696-b7a5-a523eb9faf2a",
-      "clientId": "repost-archive-client",
+      "clientId": "repost-archive-ui-client",
       "name": "",
       "description": "",
       "rootUrl": "",

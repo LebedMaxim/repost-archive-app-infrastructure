@@ -48,6 +48,21 @@ services:
     networks:
       - repost-archive-network
 
+  repost-archive-ui:
+    image: repost-archive-ui:latest
+    container_name: repost-archive-ui
+    environment:
+      REPOST_ARCHIVE_UI_PORT: ${REPOST_ARCHIVE_UI_PORT}
+      REPOST_ARCHIVE_KEYCLOAK_URL: ${REPOST_ARCHIVE_KEYCLOAK_HOST}:${REPOST_ARCHIVE_KEYCLOAK_PORT}
+      REPOST_ARCHIVE_KEYCLOAK_REALM: ${REPOST_ARCHIVE_KEYCLOAK_REALM}
+      REPOST_ARCHIVE_UI_KEYCLOAK_CLIENT: ${REPOST_ARCHIVE_UI_KEYCLOAK_CLIENT}
+    expose:
+      - ${REPOST_ARCHIVE_UI_PORT}
+    ports:
+      - ${REPOST_ARCHIVE_UI_PORT}:80
+    networks:
+      - repost-archive-network
+
 networks:
   repost-archive-network:
     driver: bridge
